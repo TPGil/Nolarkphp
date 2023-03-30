@@ -38,7 +38,7 @@ while ($ligne = $res->fetch(PDO::FETCH_OBJ)) {
     echo '<article id="casques">';
     echo '<img src="../images/casques/', $ligne->libelle, '/', $ligne->image,
     '" alt="', $ligne->modele,'" id="img">';
-    echo '<p id="p.prix">',$ligne->prix, '€','</p>','<p id="p.',afficheStock($stock),'">',$ligne->stock,'</p>','<p id="p.marque">', $ligne->nom,'</p>','<p id="p.modele">', $ligne->modele,'</p>','<p id="img.classement">', $ligne->classement,'</p>';
+    echo '<p id="p.prix">',$ligne->prix, '€','</p>','<p id="p.',afficheStock($ligne->stock),'">',$ligne->stock,'</p>','<p id="p.marque">', $ligne->nom,'</p>','<p id="p.modele">', $ligne->modele,'</p>','<p id="img.classement">', $ligne->classement,'</p>';
     echo '</article>';
 }
 
