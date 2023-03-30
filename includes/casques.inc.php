@@ -5,25 +5,21 @@ $cnx = new PDO('mysql:host=127.0.0.1;dbname=nolark', 'nolarkuser', 'nolarkpwd');
 $fichier = basename($_SERVER['PHP_SELF']);
 
 if ($fichier == 'route.php') {
-    // Si on est sur la page "route.php", on récupère seulement les casques de type 4
     $req = 'SELECT casque.id, nom, modele, libelle, prix, classement, image, stock';
     $req .= ' FROM casque INNER JOIN type ON casque.type=type.id';
     $req .= ' INNER JOIN marque ON casque.marque=marque.id';
     $req .= ' WHERE type.id = 4';
 } else if ($fichier == 'piste.php') {
-    // Si on est sur la page "route.php", on récupère seulement les casques de type 4
     $req = 'SELECT casque.id, nom, modele, libelle, prix, classement, image, stock';
     $req .= ' FROM casque INNER JOIN type ON casque.type=type.id';
     $req .= ' INNER JOIN marque ON casque.marque=marque.id';
     $req .= ' WHERE type.id = 3';
 } else if ($fichier == 'enfants.php') {
-    // Si on est sur la page "route.php", on récupère seulement les casques de type 4
     $req = 'SELECT casque.id, nom, modele, libelle, prix, classement, image, stock';
     $req .= ' FROM casque INNER JOIN type ON casque.type=type.id';
     $req .= ' INNER JOIN marque ON casque.marque=marque.id';
     $req .= ' WHERE type.id = 2';
 } else if ($fichier == 'cross.php') {
-    // Si on est sur la page "route.php", on récupère seulement les casques de type 4
     $req = 'SELECT casque.id, nom, modele, libelle, prix, classement, image, stock';
     $req .= ' FROM casque INNER JOIN type ON casque.type=type.id';
     $req .= ' INNER JOIN marque ON casque.marque=marque.id';
@@ -38,12 +34,12 @@ while ($ligne = $res->fetch(PDO::FETCH_OBJ)) {
     echo '<article id="casques">';
     echo '<img src="../images/casques/', $ligne->libelle, '/', $ligne->image,
     '" alt="', $ligne->modele,'" class="img">';
-    echo '<p class="prix">',$ligne->prix, '€','</p>','<p class="',afficheStock($ligne->stock),'">',$ligne->stock,'</p>','<p class="marque">', $ligne->nom,'</p>','<p class="modele">', $ligne->modele,'</p>','<div class="classement"','<p class="classement',$ligne->classement,'">', $ligne->classement,'</p>','</div>';
+    echo '<p class="prix">',$ligne->prix, '€','</p>','<p class="',GetStock($ligne->stock),'">',$ligne->stock,'</p>','<p class="marque">', $ligne->nom,'</p>','<p class="modele">', $ligne->modele,'</p>','<div class="classement"','<p class="classement',GetClassement($ligne->classement),'">', $ligne->classement,'</p>','</div>';
     echo '</article>';
 }
 
 
-function afficheStock($stock) {
+function GetStock($stock) {
     if ($stock > 0) {
         return 'stockok';
     }
@@ -53,10 +49,13 @@ function afficheStock($stock) {
     
 }
 
+function GetClassement($classement){
+   return $classement==0?'00':(string)classement;
+}
 
 echo '</section>';
 
-
+//ok
 //<?php //
 //
 ///*
